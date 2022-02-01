@@ -30,4 +30,8 @@ const movies: Movie[] = [
   },
 ];
 
+export const getMovie = (id: number): Movie | undefined => {
+  return movies.find((m) => m.id === id);
+};
+
 export default movies;

@@ -15,8 +15,8 @@ const Header = ({
   setIsTableView: (isTableView: boolean) => void;
 }): React.ReactElement => {
   return (
-    <div className="flex flex-row justify-between mb-4">
-      <div className="flex flex-row">
+    <div className="flex flex-col justify-between mb-4 sm:flex-row">
+      <div className="flex flex-row mb-2 sm:mb-0">
         <Input
           placeholder="Search..."
           prefix={<SearchOutlined style={{ color: 'rgba(0,0,0,.45)' }} />}
