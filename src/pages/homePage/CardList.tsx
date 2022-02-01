@@ -17,7 +17,7 @@ const CardList = ({ movies }: Props): React.ReactElement => {
           poster={m.poster}
           title={m.name}
           releasedYear={m.releasedYear}
-          className="rounded-md shadow-lg bg-gray-50"
+          className="rounded-md shadow-lg"
         />
       ))}
     </div>

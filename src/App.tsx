@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
-import CardList from './pages/homePage/CardList';
+import 'antd/dist/antd.css';
+import MainPage from './pages/homePage/MainPage';
 
 function App(): React.ReactElement {
   return (
-    <div className="ml-16 mr-16 App">
-      <CardList />
+    <div className="mt-4 mb-4 ml-16 mr-16 App">
+      <MainPage />
     </div>
   );
 }
