@@ -8,7 +8,7 @@ type Props = {
 
 const CardList = ({ movies }: Props): React.ReactElement => {
   return (
-    <div className="grid flex-1 gap-8 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+    <div className="grid flex-1 gap-8 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
       {movies.map((m) => (
         <Card
           key={m.id}

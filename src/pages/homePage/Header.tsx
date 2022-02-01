@@ -1,10 +1,21 @@
 import React from 'react';
-import { Input, Button, Tooltip, InputNumber } from 'antd';
-import { InfoCircleOutlined, SearchOutlined } from '@ant-design/icons';
+import { Input, Button, Tooltip, DatePicker } from 'antd';
+import {
+  AppstoreOutlined,
+  InfoCircleOutlined,
+  SearchOutlined,
+  UnorderedListOutlined,
+} from '@ant-design/icons';
 
-const Header = (): React.ReactElement => {
+const Header = ({
+  isTableView,
+  setIsTableView,
+}: {
+  isTableView: boolean;
+  setIsTableView: (isTableView: boolean) => void;
+}): React.ReactElement => {
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row justify-between mb-4">
       <div className="flex flex-row">
         <Input
           placeholder="Search..."
@@ -14,16 +25,24 @@ const Header = (): React.ReactElement => {
               <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
             </Tooltip>
           }
+          className="mr-2"
         />
-        <InputNumber
-          addonAfter="Released Year"
-          min={1900}
-          max={new Date().getFullYear()}
-          className="w-36"
+        <DatePicker
+          picker={'year'}
+          placeholder="Released Year"
+          className="w-full"
         />
       </div>
-
-      <Button className="justify-end">Add Movie</Button>
+      <div className="flex flex-row items-center justify-end">
+        <Button
+          type={'primary'}
+          size={'small'}
+          className="mr-2"
+          icon={isTableView ? <AppstoreOutlined /> : <UnorderedListOutlined />}
+          onClick={(): void => setIsTableView(!isTableView)}
+        />
+        <Button>Add Movie</Button>
+      </div>
     </div>
   );
 };

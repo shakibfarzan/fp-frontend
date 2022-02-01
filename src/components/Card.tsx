@@ -27,7 +27,7 @@ const MovieCard = ({
       cover={<img alt={alt} src={poster} className="w-full h-full max-h-545" />}
     >
       <Meta
-        title={<p className="text-lg font-bold">{title}</p>}
+        title={<p className="text-lg font-bold truncate">{title}</p>}
         description={
           <p className="font-bold text-gray-500 text-md">
             <span className="font-normal text-gray-400 text-md">
