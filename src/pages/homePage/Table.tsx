@@ -1,7 +1,7 @@
 import React from 'react';
 import Movie from '../../types/Movie';
 import { Table } from 'antd';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 type Props = {
   movies: Array<Movie>;
@@ -30,9 +30,18 @@ const MovieTable = ({ movies }: Props): React.ReactElement => {
           title: 'Name',
           dataIndex: 'name',
           key: 'name',
-          render: function nameRenderer(name: string): React.ReactNode {
-            // return <Link to={'/'}>{name}</Link>;
-            return <>{name}</>;
+          render: function nameRenderer(
+            name: string,
+            record: Movie,
+          ): React.ReactNode {
+            return (
+              <Link
+                to={`movies/${record.id}`}
+                className="font-bold text-gray-800"
+              >
+                {name}
+              </Link>
+            );
           },
           sorter: (a, b) => a.name.localeCompare(b.name),
         },

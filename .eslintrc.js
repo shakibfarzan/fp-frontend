@@ -92,5 +92,10 @@ module.exports = {
           "endOfLine": "auto"
         }
       ]
+    },
+    "parserOptions": {
+      project: "tsconfig.json",
+      tsconfigRootDir: __dirname,
+      sourceType: "module",
     }
   }
