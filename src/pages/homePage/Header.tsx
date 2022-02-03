@@ -7,6 +7,7 @@ import {
   UnorderedListOutlined,
 } from '@ant-design/icons';
 import moment from 'moment';
+import AddMovie from './Add';
 
 const Header = ({
   isTableView,
@@ -58,7 +59,10 @@ const Header = ({
           icon={isTableView ? <AppstoreOutlined /> : <UnorderedListOutlined />}
           onClick={(): void => setIsTableView(!isTableView)}
         />
-        <Button>Add Movie</Button>
+        <AddMovie
+          setSearchValue={setSearchValue}
+          setReleasedYear={setReleasedYearValue}
+        />
       </div>
     </div>
   );

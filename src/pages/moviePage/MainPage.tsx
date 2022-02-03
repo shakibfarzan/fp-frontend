@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { READ_SINGLE_MOVIE, POSTER_URL } from '../../api';
 import axios from '../../api/axios';
+import ScrollToTop from '../../components/ScrollToTop';
 import Movie from '../../types/Movie';
 import Header from './Header';
 
@@ -18,7 +19,7 @@ const MainPage = (): React.ReactElement => {
         const data = res.data;
         setMovie(data);
       });
-  }, [id, movie]);
+  }, [id]);
 
   return (
     <div>
@@ -44,6 +45,7 @@ const MainPage = (): React.ReactElement => {
           />
         </div>
       </div>
+      <ScrollToTop />
     </div>
   );
 };

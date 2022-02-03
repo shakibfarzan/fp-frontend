@@ -24,13 +24,13 @@ const MovieCard = ({
       key={id}
       hoverable
       className={className}
-      cover={<img alt={alt} src={poster} className="w-full h-full max-h-545" />}
+      cover={<img alt={alt} src={poster} className="w-full h-full" />}
     >
       <Meta
         title={<p className="text-lg font-bold truncate">{title}</p>}
         description={
           <p className="font-bold text-gray-500 text-md">
-            <span className="font-normal text-gray-400 text-md">
+            <span className="font-normal text-gray-400 text-md max-h-545">
               Released year:{' '}
             </span>
             {releasedYear}

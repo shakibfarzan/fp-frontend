@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
 import 'antd/dist/antd.css';
+import './App.css';
 import HomePage from './pages/homePage/MainPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NotFound from './pages/NotFound';
@@ -17,6 +17,7 @@ function App(): React.ReactElement {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
+      <footer className="h-3"></footer>
     </BrowserRouter>
   );
 }

@@ -5,6 +5,7 @@ import Table from './Table';
 import Movie from '../../types/Movie';
 import axios from '../../api/axios';
 import { getFilteredURL, getParams } from './utils';
+import ScrollToTop from '../../components/ScrollToTop';
 
 const MainPage = (): React.ReactElement => {
   const [isTableView, setIsTableView] = useState<boolean>(false);
@@ -36,6 +37,7 @@ const MainPage = (): React.ReactElement => {
         setIsTableView={setIsTableView}
       />
       {isTableView ? <Table movies={movies} /> : <CardList movies={movies} />}
+      <ScrollToTop />
     </div>
   );
 };
