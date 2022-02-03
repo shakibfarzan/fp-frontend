@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMovie } from '../../fakeData/fakedata';
+import { READ_SINGLE_MOVIE, POSTER_URL } from '../../api';
+import axios from '../../api/axios';
+import Movie from '../../types/Movie';
 import Header from './Header';
 
 const MainPage = (): React.ReactElement => {
   const { id } = useParams();
-  const movie = getMovie(parseInt(id ? id : '-1'));
+  const [movie, setMovie] = useState<Movie>();
+
+  useEffect(() => {
+    axios
+      .get(READ_SINGLE_MOVIE, {
+        params: { id },
+      })
+      .then((res) => {
+        const data = res.data;
+        setMovie(data);
+      });
+  }, [id, movie]);
+
   return (
     <div>
       <Header />
@@ -23,7 +37,11 @@ const MainPage = (): React.ReactElement => {
           </p>
         </div>
         <div>
-          <img src={movie?.poster} alt={movie?.name} className="w-full" />
+          <img
+            src={`${POSTER_URL}/${movie?.poster}`}
+            alt={movie?.name}
+            className="w-full"
+          />
         </div>
       </div>
     </div>

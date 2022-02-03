@@ -2,9 +2,10 @@ import React from 'react';
 import Movie from '../../types/Movie';
 import { Table } from 'antd';
 import { Link } from 'react-router-dom';
+import { POSTER_URL } from '../../api';
 
 type Props = {
-  movies: Array<Movie>;
+  movies: Array<Movie> | undefined;
 };
 
 const MovieTable = ({ movies }: Props): React.ReactElement => {
@@ -21,7 +22,11 @@ const MovieTable = ({ movies }: Props): React.ReactElement => {
             record: Movie,
           ): React.ReactNode {
             return (
-              <img className="w-20 h-auto" alt={record.name} src={poster} />
+              <img
+                className="w-20 h-auto"
+                alt={record.name}
+                src={`${POSTER_URL}/${poster}`}
+              />
             );
           },
           width: '80px',
