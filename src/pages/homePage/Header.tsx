@@ -6,13 +6,22 @@ import {
   SearchOutlined,
   UnorderedListOutlined,
 } from '@ant-design/icons';
+import moment from 'moment';
 
 const Header = ({
   isTableView,
   setIsTableView,
+  searchValue,
+  setSearchValue,
+  releasedYearValue,
+  setReleasedYearValue,
 }: {
   isTableView: boolean;
   setIsTableView: (isTableView: boolean) => void;
+  searchValue: string | undefined;
+  setSearchValue: (searchValue: string | undefined) => void;
+  releasedYearValue: number | undefined;
+  setReleasedYearValue: (releasedYearValue: number | undefined) => void;
 }): React.ReactElement => {
   return (
     <div className="flex flex-col justify-between mb-4 sm:flex-row">
@@ -26,11 +35,19 @@ const Header = ({
             </Tooltip>
           }
           className="mr-2"
+          value={searchValue}
+          onChange={(e): void => setSearchValue(e.target.value)}
         />
         <DatePicker
           picker={'year'}
           placeholder="Released Year"
           className="w-full"
+          value={
+            releasedYearValue
+              ? moment().set('year', releasedYearValue)
+              : undefined
+          }
+          onChange={(e): void => setReleasedYearValue(e?.get('year'))}
         />
       </div>
       <div className="flex flex-row items-center justify-end">
