@@ -1,3 +1,4 @@
+import { Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { READ_SINGLE_MOVIE, POSTER_URL } from '../../api';
@@ -32,13 +33,18 @@ const MainPage = (): React.ReactElement => {
   return (
     <div>
       <Header id={id} movie={movie} refresh={refresh} />
+      {isLoading && (
+        <div className="absolute shadow-2xl top-1/2 left-1/2 backdrop-blur-md">
+          <Spin size="large" />
+        </div>
+      )}
       {!isLoading && (
         <div className="grid flex-1 gap-8 md:grid-cols-2">
           <div className="p-4 backdrop-blur-sm">
-            <h2 className="font-serif text-3xl font-bold text-slate-700">
+            <h2 className="font-serif text-3xl font-bold text-slate-700 text-shadow-md">
               {movie?.name}
             </h2>
-            <p className="text-xl font-bold text-slate-900">
+            <p className="font-serif text-xl font-bold text-slate-900">
               {movie?.description}
             </p>
             <p className="font-bold text-left text-slate-900">
@@ -50,7 +56,7 @@ const MainPage = (): React.ReactElement => {
             <img
               src={`${POSTER_URL}/${movie?.poster}`}
               alt={movie?.name}
-              className="w-full"
+              className="w-full rounded img-shadow"
             />
           </div>
         </div>

@@ -6,6 +6,7 @@ import Movie from '../../types/Movie';
 import axios from '../../api/axios';
 import { getFilteredURL, getParams } from './utils';
 import ScrollToTop from '../../components/ScrollToTop';
+import { Spin } from 'antd';
 
 const MainPage = (): React.ReactElement => {
   const [isTableView, setIsTableView] = useState<boolean>(false);
@@ -41,6 +42,11 @@ const MainPage = (): React.ReactElement => {
         isTableView={isTableView}
         setIsTableView={setIsTableView}
       />
+      {isLoading && (
+        <div className="absolute shadow-2xl top-1/2 left-1/2 backdrop-blur-md">
+          <Spin size="large" />
+        </div>
+      )}
       {!isLoading &&
         (isTableView ? (
           <Table movies={movies} />

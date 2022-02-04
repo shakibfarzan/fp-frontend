@@ -26,7 +26,7 @@ const CardList = ({ movies }: Props): React.ReactElement => {
         ))}
       </div>
       {!movies?.length && (
-        <h1 className="mt-4 text-4xl font-semibold text-center">
+        <h1 className="p-2 mt-4 text-4xl font-semibold text-center backdrop-blur-md">
           No Movie Found!
         </h1>
       )}
