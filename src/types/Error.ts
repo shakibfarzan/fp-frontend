@@ -1,8 +1,8 @@
-type Errors = {
+type Error = {
   name: string;
   description: string;
   releasedYear: string;
   poster: string;
 };
 
-export default Errors;
+export default Error;

@@ -6,6 +6,7 @@ import Movie from '../../types/Movie';
 import axios from '../../api/axios';
 import { getFilteredURL, getParams } from './utils';
 import ScrollToTop from '../../components/ScrollToTop';
+import { toast } from 'react-toastify';
 
 const MainPage = (): React.ReactElement => {
   const [isTableView, setIsTableView] = useState<boolean>(false);
@@ -23,6 +24,10 @@ const MainPage = (): React.ReactElement => {
       .then((response) => {
         const data = response.data.body;
         setMovies(data);
+      })
+      .catch((res) => {
+        toast.error(res.message);
+        setMovies([]);
       });
   }, [releasedYearValue, searchValue]);
 

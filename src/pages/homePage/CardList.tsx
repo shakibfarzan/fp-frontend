@@ -10,20 +10,27 @@ type Props = {
 
 const CardList = ({ movies }: Props): React.ReactElement => {
   return (
-    <div className="grid flex-1 gap-8 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
-      {movies?.map((m) => (
-        <Link key={m.id} to={`movies/${m.id}`}>
-          <Card
-            id={m.id}
-            alt={m.name}
-            poster={`${POSTER_URL}/${m.poster}`}
-            title={m.name}
-            releasedYear={m.releasedYear}
-            className="rounded-md shadow-lg"
-          />
-        </Link>
-      ))}
-    </div>
+    <>
+      <div className="grid flex-1 gap-8 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
+        {movies?.map((m) => (
+          <Link key={m.id} to={`movies/${m.id}`}>
+            <Card
+              id={m.id}
+              alt={m.name}
+              poster={`${POSTER_URL}/${m.poster}`}
+              title={m.name}
+              releasedYear={m.releasedYear}
+              className="rounded-md shadow-lg"
+            />
+          </Link>
+        ))}
+      </div>
+      {!movies?.length && (
+        <h1 className="mt-4 text-4xl font-semibold text-center">
+          No Movie Found!
+        </h1>
+      )}
+    </>
   );
 };
 

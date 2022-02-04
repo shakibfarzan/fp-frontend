@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, DatePicker, Form, Input, Modal, Typography } from 'antd';
 import FormDataType from '../types/FormData';
-import Errors from '../types/Errors';
+import Error from '../types/Error';
 import moment from 'moment';
 import Uploader from './Uploader';
 import axios from '../api/axios';
@@ -38,7 +38,7 @@ const MovieForm = ({
     releasedYear: undefined,
   });
   const [posterFile, setPosterFile] = useState<File>();
-  const [errors, setErrors] = useState<Errors>({
+  const [errors, setErrors] = useState<Error>({
     name: '',
     description: '',
     releasedYear: '',
@@ -104,11 +104,13 @@ const MovieForm = ({
 
   const onCancel = (): void => {
     setVisible(false);
-    setFormData({
-      name: '',
-      description: '',
-      releasedYear: undefined,
-    });
+    if (!refresh) {
+      setFormData({
+        name: '',
+        description: '',
+        releasedYear: undefined,
+      });
+    }
     setPosterFile(undefined);
     setErrors({
       name: '',
