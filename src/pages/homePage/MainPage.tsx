@@ -9,6 +9,7 @@ import ScrollToTop from '../../components/ScrollToTop';
 
 const MainPage = (): React.ReactElement => {
   const [isTableView, setIsTableView] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(true);
   const [movies, setMovies] = useState<Array<Movie>>();
   const [searchValue, setSearchValue] = useState<string | undefined>(undefined);
   const [releasedYearValue, setReleasedYearValue] = useState<
@@ -23,6 +24,7 @@ const MainPage = (): React.ReactElement => {
       .then((response) => {
         const data = response.data.body;
         setMovies(data);
+        setLoading(false);
       })
       .catch((res) => {
         setMovies([]);
@@ -39,7 +41,12 @@ const MainPage = (): React.ReactElement => {
         isTableView={isTableView}
         setIsTableView={setIsTableView}
       />
-      {isTableView ? <Table movies={movies} /> : <CardList movies={movies} />}
+      {!isLoading &&
+        (isTableView ? (
+          <Table movies={movies} />
+        ) : (
+          <CardList movies={movies} />
+        ))}
       <ScrollToTop />
     </div>
   );

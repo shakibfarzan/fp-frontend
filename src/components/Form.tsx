@@ -56,7 +56,8 @@ const MovieForm = ({
       releasedYear: '',
       poster: '',
     };
-    if (!posterFile) newErrors.poster = 'Upload poster is required!';
+    if (!posterFile && !refresh)
+      newErrors.poster = 'Upload poster is required!';
     if (!formData.name) newErrors.name = 'Name is required!';
     if (!formData.description)
       newErrors.description = 'Description is required!';
@@ -65,19 +66,23 @@ const MovieForm = ({
 
     setErrors(newErrors);
 
-    if (
-      formData.name &&
-      formData.description &&
-      formData.releasedYear &&
-      posterFile
-    ) {
-      setLoading(true);
+    if (formData.name && formData.description && formData.releasedYear) {
       const bodyFormData = new FormData();
-      bodyFormData.append('name', formData.name);
-      bodyFormData.append('description', formData.description);
-      bodyFormData.append('releasedYear', formData.releasedYear.toString());
-      bodyFormData.append('poster', posterFile);
-      if (id) bodyFormData.append('id', id.toString());
+      if (!refresh && !posterFile) return;
+      if (!refresh && posterFile) {
+        setLoading(true);
+        bodyFormData.append('name', formData.name);
+        bodyFormData.append('description', formData.description);
+        bodyFormData.append('releasedYear', formData.releasedYear.toString());
+        bodyFormData.append('poster', posterFile);
+      } else if (id) {
+        setLoading(true);
+        bodyFormData.append('name', formData.name);
+        bodyFormData.append('description', formData.description);
+        bodyFormData.append('releasedYear', formData.releasedYear.toString());
+        if (posterFile) bodyFormData.append('poster', posterFile);
+        bodyFormData.append('id', id.toString());
+      }
       axios
         .post(apiURL, bodyFormData, {
           headers: { 'Content-Type': 'multipart/form-data' },
@@ -112,6 +117,7 @@ const MovieForm = ({
       });
     }
     setPosterFile(undefined);
+
     setErrors({
       name: '',
       description: '',
@@ -145,7 +151,11 @@ const MovieForm = ({
 
   return (
     <>
-      <Button className={className} onClick={(): void => setVisible(true)}>
+      <Button
+        type="primary"
+        className={className}
+        onClick={(): void => setVisible(true)}
+      >
         {title}
       </Button>
       <Modal
