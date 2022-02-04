@@ -1,8 +1,8 @@
-import { Button } from 'antd';
 import React from 'react';
 import MovieForm from '../../components/Form';
 import Movie from '../../types/Movie';
 import { UPDATE_MOVIE } from '../../api';
+import Delete from './Delete';
 
 const Header = ({
   id,
@@ -28,7 +28,7 @@ const Header = ({
           }}
           refresh={refresh}
         />
-        <Button danger>Remove Movie</Button>
+        <Delete id={id} name={movie?.name} />
       </div>
     </div>
   );
