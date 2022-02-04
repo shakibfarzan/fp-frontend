@@ -9,6 +9,11 @@ import Header from './Header';
 const MainPage = (): React.ReactElement => {
   const { id } = useParams();
   const [movie, setMovie] = useState<Movie>();
+  const [shouldRefresh, setRefresh] = useState<boolean>(false);
+
+  const refresh = (): void => {
+    setRefresh(true);
+  };
 
   useEffect(() => {
     axios
@@ -18,12 +23,13 @@ const MainPage = (): React.ReactElement => {
       .then((res) => {
         const data = res.data;
         setMovie(data);
+        setRefresh(false);
       });
-  }, [id]);
+  }, [id, shouldRefresh]);
 
   return (
     <div>
-      <Header />
+      <Header id={id} movie={movie} refresh={refresh} />
       <div className="grid flex-1 gap-8 md:grid-cols-2">
         <div className="p-4 backdrop-blur-sm">
           <h2 className="font-serif text-3xl font-bold text-slate-700">

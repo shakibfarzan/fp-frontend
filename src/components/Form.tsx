@@ -1,19 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, DatePicker, Form, Input, Modal, Typography } from 'antd';
-import FormDataType from '../../types/FormData';
-import Errors from '../../types/Errors';
+import FormDataType from '../types/FormData';
+import Errors from '../types/Errors';
 import moment from 'moment';
-import Uploader from '../../components/Uploader';
-import axios from '../../api/axios';
-import { CREATE_MOVIE } from '../../api';
+import Uploader from './Uploader';
+import axios from '../api/axios';
 import { toast } from 'react-toastify';
 
-const AddMovie = ({
+const MovieForm = ({
   setSearchValue,
   setReleasedYear,
+  title,
+  initialFormData,
+  id,
+  apiURL,
+  className,
+  refresh,
 }: {
   setSearchValue?: (value: string | undefined) => void;
   setReleasedYear?: (value: number | undefined) => void;
+  title: string;
+  initialFormData?: {
+    name: string;
+    description: string;
+    releasedYear: number;
+  };
+  id?: string;
+  apiURL: string;
+  className?: string;
+  refresh?: () => void;
 }): React.ReactElement => {
   const [isVisible, setVisible] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(false);
@@ -29,6 +44,10 @@ const AddMovie = ({
     releasedYear: '',
     poster: '',
   });
+
+  useEffect(() => {
+    if (initialFormData) setFormData(initialFormData);
+  }, [initialFormData]);
 
   const handleSubmit = (): void => {
     const newErrors = {
@@ -58,8 +77,9 @@ const AddMovie = ({
       bodyFormData.append('description', formData.description);
       bodyFormData.append('releasedYear', formData.releasedYear.toString());
       bodyFormData.append('poster', posterFile);
+      if (id) bodyFormData.append('id', id.toString());
       axios
-        .post(CREATE_MOVIE, bodyFormData, {
+        .post(apiURL, bodyFormData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         })
         .then((res) => {
@@ -68,6 +88,7 @@ const AddMovie = ({
           setVisible(false);
           if (setSearchValue) setSearchValue('');
           if (setReleasedYear) setReleasedYear(undefined);
+          if (refresh) refresh();
           setFormData({
             name: '',
             description: '',
@@ -122,10 +143,12 @@ const AddMovie = ({
 
   return (
     <>
-      <Button onClick={(): void => setVisible(true)}>Add Movie</Button>
+      <Button className={className} onClick={(): void => setVisible(true)}>
+        {title}
+      </Button>
       <Modal
         visible={isVisible}
-        title="Add movie"
+        title={title}
         onOk={handleSubmit}
         onCancel={onCancel}
         footer={[
@@ -203,6 +226,9 @@ const AddMovie = ({
             className="mt-1"
             setFile={setPosterFile}
             title={'Upload poster'}
+            onChange={(): void => {
+              if (posterFile) setErrors({ ...errors, poster: '' });
+            }}
           />
           {errors.poster && (
             <Typography.Text type={'danger'}>{errors.poster}</Typography.Text>
@@ -213,4 +239,4 @@ const AddMovie = ({
   );
 };
 
-export default AddMovie;
+export default MovieForm;

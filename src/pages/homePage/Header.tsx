@@ -7,7 +7,8 @@ import {
   UnorderedListOutlined,
 } from '@ant-design/icons';
 import moment from 'moment';
-import AddMovie from './Add';
+import MovieForm from '../../components/Form';
+import { CREATE_MOVIE } from '../../api';
 
 const Header = ({
   isTableView,
@@ -59,9 +60,11 @@ const Header = ({
           icon={isTableView ? <AppstoreOutlined /> : <UnorderedListOutlined />}
           onClick={(): void => setIsTableView(!isTableView)}
         />
-        <AddMovie
-          setSearchValue={setSearchValue}
+        <MovieForm
           setReleasedYear={setReleasedYearValue}
+          setSearchValue={setSearchValue}
+          title="Add Movie"
+          apiURL={CREATE_MOVIE}
         />
       </div>
     </div>

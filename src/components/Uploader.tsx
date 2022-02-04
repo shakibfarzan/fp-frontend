@@ -6,10 +6,16 @@ const Uploader = ({
   setFile,
   title,
   className,
+  onChange,
+  defaultFileURL,
+  defaultFileName,
 }: {
   setFile: (file: File | undefined) => void;
   title: string;
   className?: string;
+  onChange: () => void;
+  defaultFileURL?: string;
+  defaultFileName?: string;
 }): React.ReactElement => {
   return (
     <div className={className}>
@@ -25,6 +31,18 @@ const Uploader = ({
           setFile(undefined);
           return true;
         }}
+        onChange={onChange}
+        defaultFileList={
+          defaultFileName
+            ? [
+                {
+                  uid: '1',
+                  url: defaultFileURL,
+                  name: defaultFileName ? defaultFileName : '',
+                },
+              ]
+            : undefined
+        }
       >
         <Button icon={<UploadOutlined />}>{title}</Button>
       </Upload>
