@@ -55,7 +55,6 @@ const Header = ({
       <div className="flex flex-row items-center justify-end">
         <Button
           type={'primary'}
-          size={'small'}
           className="mr-2"
           icon={isTableView ? <AppstoreOutlined /> : <UnorderedListOutlined />}
           onClick={(): void => setIsTableView(!isTableView)}

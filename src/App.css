@@ -10,3 +10,33 @@
 .mt-1{
   margin-top: 1rem !important;
 }
+
+.ant-btn:active{
+  color: #9623d8 !important;
+  border-color: #9623d8 !important;
+}
+
+.ant-btn:hover, .ant-btn:focus{
+  color: #ab46e6 !important;
+  border-color: #ab46e6 !important;
+}
+
+.ant-btn-primary{
+  background-color: #9623d8 !important;
+  border: #9623d8 !important;
+}
+
+.ant-btn-primary:hover, .ant-btn-primary:focus, .ant-btn-primary:active{
+  background-color: #ab46e6 !important;
+  border: #ab46e6 !important;
+  color: #fff !important;
+}
+
+.ant-btn-dangerous{
+  background-color: #e63232 !important; 
+}
+
+.ant-btn-dangerous:hover, .ant-btn-dangerous:focus, .ant-btn-dangerous:active{
+  background-color: #f04b4b !important;
+  color: #fff !important;
+}

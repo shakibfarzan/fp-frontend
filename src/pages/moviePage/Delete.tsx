@@ -36,7 +36,7 @@ const Delete = ({
 
   return (
     <>
-      <Button onClick={(): void => setVisible(true)} danger>
+      <Button onClick={(): void => setVisible(true)} type="primary" danger>
         Remove Movie
       </Button>
       <Modal

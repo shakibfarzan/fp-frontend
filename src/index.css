@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body{
-  background-image: url(../public/background/cool-background.png);
+  background: url(../public/background/cool-background.png);
 }
