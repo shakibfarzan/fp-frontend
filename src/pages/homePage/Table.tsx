@@ -12,6 +12,7 @@ const MovieTable = ({ movies }: Props): React.ReactElement => {
   return (
     <Table
       dataSource={movies}
+      className="bg-color backdrop-blur-sm"
       columns={[
         {
           title: '',
