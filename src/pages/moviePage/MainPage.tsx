@@ -49,7 +49,9 @@ const MainPage = (): React.ReactElement => {
             </p>
             <p className="font-bold text-left text-slate-900">
               <span className="font-normal text-slate-700">Released Year:</span>{' '}
-              {movie?.releasedYear}
+              {movie && movie.releasedYear > new Date().getFullYear()
+                ? 'Coming soon...'
+                : movie?.releasedYear}
             </p>
           </div>
           <div>

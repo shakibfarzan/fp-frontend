@@ -35,7 +35,9 @@ const MovieCard = ({
             <span className="font-normal text-gray-400 text-md max-h-545">
               Released year:{' '}
             </span>
-            {releasedYear}
+            {releasedYear > new Date().getFullYear()
+              ? 'Coming soon...'
+              : releasedYear}
           </p>
         }
       />

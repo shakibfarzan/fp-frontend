@@ -56,6 +56,9 @@ const MovieTable = ({ movies }: Props): React.ReactElement => {
           dataIndex: 'releasedYear',
           key: 'releasedYear',
           sorter: (a, b) => a.releasedYear - b.releasedYear,
+          render: (year: number): React.ReactNode => (
+            <>{year > new Date().getFullYear() ? 'Coming soon...' : year}</>
+          ),
         },
       ]}
       pagination={false}
